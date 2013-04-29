@@ -1,0 +1,14 @@
+<p>Here is an example of the Qualitymonitor plugin used to check an RTMP dynamic stream:</p>
+
+<script src="http://player.longtailvideo.com/jwplayer.js" type="text/javascript"></script>
+<script src="/content/js/examples/jwexample.js" type="text/javascript"></script>
+<div id="exampleHTML"></div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        jwExample('/support/sites/default/files/example_qualitymonitor_rtmp.xml', 'exampleHTML');
+    });
+</script>
+
+
+<p>Just the <em>plugins=qualitymonitor</em> option is needed to add the plugin to the page. The plugins needs (and supports) no additional options.</p>
+<p>Please look into the <a href="http://www.longtailvideo.com/support/jw-player/jw-player-for-flash-v5/12535/video-delivery-rtmp-streaming">RTMP streaming guide</a> for info and examples on setting up the dynamic stream playlist.</p>

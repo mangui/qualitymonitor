@@ -1,0 +1,14 @@
+<example>
+    <player>
+        <flashplayer>http://player.longtailvideo.com/player.swf</flashplayer>
+        <id>playerID</id>
+        <width>720</width>
+        <height>306</height>
+        <flashvars>
+            <playlistfile embedvalue="http://content.bitsontherun.com/jwp/VQIkSbJp.xml">playlist.xml</playlistfile>
+        </flashvars>
+        <plugins>
+            <plugin name='qualitymonitor-2' />
+        </plugins>
+    </player>
+</example>

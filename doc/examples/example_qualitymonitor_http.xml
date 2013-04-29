@@ -1,0 +1,18 @@
+<example>
+    <player>
+        <flashplayer>http://player.longtailvideo.com/player.swf</flashplayer>
+        <id>playerID</id>
+        <width>720</width>
+        <height>406</height>
+        <flashvars>
+            <controlbar>over</controlbar>
+            <file embedvalue="http://content.bitsontherun.com/jwp/LJSVMnCF.xml">/videos/elephants_dream.xml</file>
+            <image embedvalue="http://content.bitsontherun.com/thumbs/LJSVMnCF-480.jpg">/thumbs/elephants_dream.jpg</image>
+            <provider>http</provider>
+            <http.startparam>starttime</http.startparam>
+        </flashvars>
+        <plugins>
+            <plugin name="qualitymonitor-2" />
+        </plugins>
+    </player>
+</example>

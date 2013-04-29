@@ -1,0 +1,107 @@
+<h2>Purpose</h2>
+
+<p>The purpose of this guide is to be a reference for you as you get started with the latest version of the <a href="http://www.longtailvideo.com/addons/plugins/123/QualityMonitor">Quality Monitor Plugin</a> for the JW Player.</p>
+
+
+
+
+<h2>Introduction</h2>
+
+<p>The Qualitymonitor plugin for the JW Player is used to monitor the status of the bitrate switching / dynamic streaming functionalty of the player. This functionality is triggered by loading multiple quality levels of one video into the player. It will then monitor certain quality metrics and play the  optimal stream is served for every viewer.</p>
+
+<p>For more info about this functionality, please refer to the dedicated sections in the HTTP resp. RTMP streaming guides:
+
+<ul>
+<li><a href="http://www.longtailvideo.com/support/jw-player/jw-player-for-flash-v5/12534/video-delivery-http-pseudo-streaming#bitrateswitching">HTTP bitrate switching </a></li>
+<li><a href="http://www.longtailvideo.com/support/jw-player/jw-player-for-flash-v5/12535/video-delivery-rtmp-streaming#dynamicstreaming">RTMP dynamic streaming </a></li>
+</ul>
+
+
+
+
+<h2>Screenshot</h2>
+
+<p>Here's a screenshot of a JW Player with the qualitymonitor plugin:</p>
+
+<p><img src="http://www.longtailvideo.com/support/sites/default/files/qualitymonitor.png" alt="quality monitor plugin example"/></p>
+
+<p>The plugin consists of two sections. The biggest one is the overlay at the top of the video that lists and charts the current quality metrics. Additionally, the plugin contains a small messaging area in the middle of the screen, for printing player messages that relate to the video quality.</p>
+
+
+
+
+<h2>Metrics</h2>
+
+
+<p>The Qualitymonitor plugin monitors the following metrics:</p>
+
+<ul>
+<li>The <b>bandwidth</b> of the current connection, in kilobits per second (green).</li>
+<li>The number of <b>frames dropped</b> per second (red).</li>
+<li>The <b>width</b> of the video screen (blue).</li>
+<li>The currently playing <b>quality level</b> (white). The required width and bandwidth of this level is shown between parentheses.</li>
+</ul>
+
+<h4>Messages</h4>
+
+<p>In addition to these four metrics, the plugin displays two quality related messages in the middle of the screen:</p>
+
+<ul>
+<li>The moment an actual quality transition occurs (in green text).</li>
+<li>The moment a quality level gets blacklisted or un-blacklisted, as a result of too many framedrops (in red text).</li>
+</ul>
+
+<p><em>Note the framedrop detection and resulting (un)blacklisting of levels is only supported in JW Player 5.3+. For JW Player 5.0, 5.1 and 5.2, the framedrop chart will simply remain at 0.</em></p>
+
+
+
+
+<h2>Configuration Options</h2>
+
+<p>Embedding the qualitymonitor plugin is a matter of setting amending its name to the player's <b>plugins</b> option. The  plugin contains no configuration options itself.</p>
+
+<p>Here is a basic embed code example of a player using the qualitymonitor plugin, using the <a href="http://www.longtailvideo.com/support/jw-player/jw-player-for-flash-v5/15995/jw-embedder-reference-guide">JW Embedder </a>.</p>
+
+<pre>
+&lt;p id="container"&gt;The player will be placed here&lt;/p&gt;
+
+&lt;script type="text/javascript"&gt;
+ jwplayer("container").setup({
+   file: "/static/dynamic_stream.xml",
+   flashplayer: "/static/player.swf",
+   height: 270,
+   plugins: {
+     "qualitymonitor": {}
+   },
+   width: 480
+ });
+&lt;/script&gt;
+</pre>
+
+
+
+
+<h2>Skinning</h2>
+
+<p>This plugin offers no skinning functionalities.</p>
+
+
+
+
+<h2>Changelog</h2>
+
+<h4>Version 2.0</h4>
+
+<ul>
+<li>Switched from the 4.x to the 5.x plugin API. As of now, the plugin cannot be loaded in the JW Player v4.</li>
+<li>Added support for monitoring framedrops in the chart, and level (un)blacklisting events in the center message.</li>
+<li>Colored the various quality metrics in the chart, to easily distinct between them.</li>
+<li>Made the chart stop drawing when the video is paused or stopped.</li>
+</ul>
+
+<h4>Version 2.1</h4>
+
+<ul>
+<li>Added fix to support playlists loaded through the JavaScript API.</li>
+<li>Some updates around formatting of the chart labels.</li>
+</ul>

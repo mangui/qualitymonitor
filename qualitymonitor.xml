@@ -1,0 +1,16 @@
+<plugin>
+	<title>Quality Monitor Plugin</title>
+	<filename>qualitymonitor.swf</filename>
+	<version>2.0</version>
+	<compatibility>Compatible with 5.0+</compatibility>
+	<author>LongTail Video</author>
+	<description>
+		This plugin displays the current video quality parameters (bandwidth and width of the display).
+		When using bitrate switching, it also displays which level is currently active.
+		This plugin is predominantly useful for testing and debugging bitrate switching.
+	</description>
+	<href>http://developer.longtailvideo.com/trac/browser/plugins/qualitymonitor/v5</href>
+
+	<flashvars />
+
+</plugin>
