@@ -33,7 +33,8 @@ public class QualityMonitor extends Sprite implements IPlugin {
 	private var _player:IPlayer;
 	/** Reference to the cetner-screen message field. **/
 	private var _message:TextField;
-
+	/** visible / hide */
+	private var _isvisible:Boolean = true;
 
 	/** Add sparklines to the plugin. **/
 	private function addLine(max:Number,clr:Number):Sparkline {
@@ -47,11 +48,13 @@ public class QualityMonitor extends Sprite implements IPlugin {
 
 	/** Build the plugin graphics. **/
 	private function buildStage():void {
+	   
 		_back = new Sprite();
 		_back.graphics.beginFill(0x000000,0.5);
 		_back.graphics.drawRect(0,0,400,116);
-		_back.mouseEnabled = false;
+		_back.mouseEnabled = true;
 		_back.mouseChildren = false;
+		_back.addEventListener(MouseEvent.CLICK, clickHandler);
 		addChild(_back);
 		_field = new TextField();
 		_field.width = 180;
@@ -78,13 +81,28 @@ public class QualityMonitor extends Sprite implements IPlugin {
 		_message.mouseEnabled = false;
 		addChild(_message);
 	};
-
+	
+   /** button is clicked, hide quality monitoring. **/
+   private function clickHandler(evt:Event=null):void {
+      _isvisible = !_isvisible;
+      if(_isvisible) {
+         _back.graphics.beginFill(0x000000,0.5);
+      } else {
+         _back.graphics.clear();
+         _back.graphics.beginFill(0xffffff,0);
+      }
+		_back.graphics.drawRect(0,0,400,116);
+	   _field.visible = _isvisible;
+	   _lines[0].visible = _isvisible;
+	   _lines[1].visible = _isvisible;
+	   _lines[2].visible = _isvisible;
+   }
 
 	/** Update quality metrics chart. **/
 	private function checkQuality():void {
 		var txt:String = _data.currentLevel;
 		var idx:Number = Number(_data.currentLevel.substr(0,1));
-		if(_player.playlist.length) { 
+		if(_player.playlist.length) {
 			var arr:Array = _player.playlist.currentItem.levels;
 			if(arr.length > 0) {
 				var lvl:Number = _player.playlist.currentItem.currentLevel;
@@ -96,7 +114,7 @@ public class QualityMonitor extends Sprite implements IPlugin {
 		_lines[0].spark(_data.bandwidth);
 		_lines[1].spark(_data.buffer);
 		_lines[2].spark(idx);
-		_field.htmlText = 
+		_field.htmlText =
 			'<font color="#00FF00"><b>bandwidth:</b> ' + _data.bandwidth + ' kbps<br/></font>' +
 			'<font color="#FF0000"><b>buffer size:</b> ' + _data.buffer + ' sec<br/></font>' +
 			'<font color="#FFFFFF"><b>level:</b> ' + txt + '</font>';
@@ -121,10 +139,10 @@ public class QualityMonitor extends Sprite implements IPlugin {
 			width: _player.config.width,
 			buffer:0
 		};
+
 		buildStage();
 		checkQuality();
 	};
-
 
 	/** Blip a transition complete text in the display. **/
 	private function metaHandler(event:MediaEvent):void {
