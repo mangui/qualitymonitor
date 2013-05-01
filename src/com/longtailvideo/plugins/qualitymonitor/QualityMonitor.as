@@ -34,7 +34,7 @@ public class QualityMonitor extends Sprite implements IPlugin {
 	/** Reference to the cetner-screen message field. **/
 	private var _message:TextField;
 	/** visible / hide */
-	private var _isvisible:Boolean = true;
+	private var _isvisible:Boolean = false;
 
 	/** Add sparklines to the plugin. **/
 	private function addLine(max:Number,clr:Number):Sparkline {
@@ -50,8 +50,6 @@ public class QualityMonitor extends Sprite implements IPlugin {
 	private function buildStage():void {
 	   
 		_back = new Sprite();
-		_back.graphics.beginFill(0x000000,0.5);
-		_back.graphics.drawRect(0,0,400,116);
 		_back.mouseEnabled = true;
 		_back.mouseChildren = false;
 		_back.addEventListener(MouseEvent.CLICK, clickHandler);
@@ -80,18 +78,23 @@ public class QualityMonitor extends Sprite implements IPlugin {
 		_message.visible = false;
 		_message.mouseEnabled = false;
 		addChild(_message);
+		toggleDisplay();
 	};
 	
    /** button is clicked, hide quality monitoring. **/
    private function clickHandler(evt:Event=null):void {
       _isvisible = !_isvisible;
+      toggleDisplay();
+   }
+   
+   private function toggleDisplay():void {
       if(_isvisible) {
          _back.graphics.beginFill(0x000000,0.5);
       } else {
          _back.graphics.clear();
          _back.graphics.beginFill(0xffffff,0);
       }
-		_back.graphics.drawRect(0,0,400,116);
+           _back.graphics.drawRect(0,0,400,116);
 	   _field.visible = _isvisible;
 	   _lines[0].visible = _isvisible;
 	   _lines[1].visible = _isvisible;
@@ -133,9 +136,9 @@ public class QualityMonitor extends Sprite implements IPlugin {
 		_player.addEventListener(MediaEvent.JWPLAYER_MEDIA_META,metaHandler);
 		_player.addEventListener(PlayerStateEvent.JWPLAYER_PLAYER_STATE,stateHandler);
 		_data = {
-			bandwidth: 95,
+			bandwidth: 0,
 			droppedFrames: 0,
-			currentLevel: '1 of 1 (5kbps, 320px)',
+			currentLevel: '1 of 1 (0kbps, 320px)',
 			width: _player.config.width,
 			buffer:0
 		};
