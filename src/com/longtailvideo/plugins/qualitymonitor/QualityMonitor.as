@@ -162,7 +162,7 @@ public class QualityMonitor extends Sprite implements IPlugin {
 			_data.currentLevel = event.metadata.currentLevel;
 		}
 		if(event.metadata.buffer) {
-			_data.buffer = Math.round(event.metadata.buffer);
+			_data.buffer = Math.round(10*event.metadata.buffer)/10;
 		}
 		if(event.metadata.type == 'blacklist') {
 			if(event.metadata.state === false) {
