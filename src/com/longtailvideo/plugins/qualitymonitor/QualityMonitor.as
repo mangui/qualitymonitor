@@ -134,6 +134,7 @@ public class QualityMonitor extends Sprite implements IPlugin {
 	public function initPlugin(player:IPlayer, config:PluginConfig):void {
 		_player = player;
 		_player.addEventListener(MediaEvent.JWPLAYER_MEDIA_META,metaHandler);
+		_player.addEventListener(MediaEvent.JWPLAYER_MEDIA_TIME,mediaTimeHandler);
 		_player.addEventListener(PlayerStateEvent.JWPLAYER_PLAYER_STATE,stateHandler);
 		_data = {
 			bandwidth: 0,
@@ -161,9 +162,6 @@ public class QualityMonitor extends Sprite implements IPlugin {
 		if(event.metadata.currentLevel) {
 			_data.currentLevel = event.metadata.currentLevel;
 		}
-		if(event.metadata.buffer) {
-			_data.buffer = Math.round(10*event.metadata.buffer)/10;
-		}
 		if(event.metadata.type == 'blacklist') {
 			if(event.metadata.state === false) {
 				setMessage("Un-blacklisted level " + (event.metadata.level+1),0xff0000);
@@ -172,7 +170,15 @@ public class QualityMonitor extends Sprite implements IPlugin {
 			}
 		}
 	};
-
+	
+	/** Blip a transition complete text in the display. **/
+	private function mediaTimeHandler(event:MediaEvent):void {
+		if((event.bufferPercent != 0) && (event.duration >0)) {
+			_data.buffer = Math.round(event.bufferPercent*event.duration/10)/10;
+		} else {
+		   _data.buffer = 0;
+		}
+   }
 
 	/** Reposition the monitor when the player resizes itself **/
 	public function resize(wid:Number, hei:Number):void {
