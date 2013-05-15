@@ -65,7 +65,7 @@ public class QualityMonitor extends Sprite implements IPlugin {
 		_field.mouseEnabled = false;
 		addChild(_field);
 		_lines = new Array(
-			addLine(4000,0x00FF00),
+			addLine(2000,0x00FF00),
 			addLine(60,0xFF0000),
 			addLine(6,0xFFFFFF)
 		);
