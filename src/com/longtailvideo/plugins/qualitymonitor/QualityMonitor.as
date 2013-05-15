@@ -66,7 +66,7 @@ public class QualityMonitor extends Sprite implements IPlugin {
 		addChild(_field);
 		_lines = new Array(
 			addLine(4000,0x00FF00),
-			addLine(40,0xFF0000),
+			addLine(60,0xFF0000),
 			addLine(6,0xFFFFFF)
 		);
 		_message = new TextField();
@@ -104,7 +104,7 @@ public class QualityMonitor extends Sprite implements IPlugin {
 	/** Update quality metrics chart. **/
 	private function checkQuality():void {
 		var txt:String = _data.currentLevel;
-		var idx:Number = Number(_data.currentLevel.substr(0,1));
+		var idx:Number = Number(txt.substr(0,1));
 		if(_player.playlist.length) {
 			var arr:Array = _player.playlist.currentItem.levels;
 			if(arr.length > 0) {
