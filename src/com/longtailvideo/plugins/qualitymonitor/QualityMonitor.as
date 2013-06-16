@@ -174,7 +174,7 @@ public class QualityMonitor extends Sprite implements IPlugin {
 	/** Blip a transition complete text in the display. **/
 	private function mediaTimeHandler(event:MediaEvent):void {
 		if((event.bufferPercent != 0) && (event.duration >0)) {
-			_data.buffer = Math.round(event.bufferPercent*event.duration/10)/10;
+			_data.buffer = Math.round(((event.bufferPercent*event.duration)-100*(event.position-event.offset))/10)/10;
 		} else {
 		   _data.buffer = 0;
 		}
